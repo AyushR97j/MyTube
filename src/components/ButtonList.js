@@ -22,7 +22,7 @@ const ButtonList = () => {
   }
 
   return (
-    <div className='relative'>
+    <div className='relative z-10'>
       <div className='absolute w-full flex items-center mt-3'>
         <IoIosArrowBack className='rounded-full h-8 w-8 hover:bg-gray-300 ' onClick={leftScroll} />
         <div className='flex-grow'></div>

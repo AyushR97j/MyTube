@@ -3,8 +3,9 @@ import ytlogo from "../assets/images/ytLogo.png";
 import menu from "../assets/images/menu.webp";
 import userIcon from "../assets/images/userIcon.png";
 import searchIcon from "../assets/images/searchIcon.png";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
+import { cacheResults } from '../utils/searchSlice';
 
 const Head = () => {
 
@@ -13,9 +14,16 @@ const Head = () => {
   const[searchQuery, setSearchQuery] = useState("");
   const[suggestions, setSuggestions] = useState([]);
   const[showSuggestions, setShowSuggestions] = useState(false);
+  const searchCache = useSelector((store) => store.search)
 
   useEffect(() => {
-    const timer = setTimeout(() => getSearchSuggestion(), 200);
+    const timer = setTimeout(() => {
+      if(searchCache[searchQuery]) {
+        setSuggestions(searchCache[searchQuery]);
+      } else {
+        getSearchSuggestion()
+      }
+    }, 200);
 
     return() => {
       clearTimeout(timer);
@@ -28,6 +36,13 @@ const Head = () => {
     const json = await data.json();
     //console.log(json[1]);
     setSuggestions(json[1]);
+
+    //update cache
+    dispatch(
+      cacheResults({
+        [searchQuery]: json[1]
+      })
+    )
   }
 
   const dispatch = useDispatch();
@@ -71,7 +86,7 @@ const Head = () => {
         </div>
 
         {showSuggestions && (
-          <div className='fixed bg-white py-2 px-2 w-[37rem] z-50 shadow-lg rounded-lg border border-gray-100'>
+          <div className='fixed bg-white py-2 px-2 w-[30rem] z-50 shadow-lg rounded-lg border border-gray-100'>
           <ul>
           {suggestions.map((s) => (
                 <li key={s} className='py-2 px-3 shadow-sm hover:bg-gray-100'>

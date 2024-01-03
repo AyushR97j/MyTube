@@ -16,7 +16,7 @@ const ButtonList = () => {
   }
   const rightScroll = () => {
     const scrollCont = scrollContRef.current;
-    let width = scrollCont.clientWidth/4;
+    let width = scrollCont.clientWidth;
     //console.log(width)
     scrollCont.scrollLeft += width;
   }

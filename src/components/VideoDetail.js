@@ -11,7 +11,6 @@ const VideoDetail = ({videoId}) => {
     const getVideoDetails = async () => {
         const data = await fetch(`${process.env.REACT_APP_VIDEO_DETAIL_API_PART1}${videoId}${process.env.REACT_APP_VIDEO_DETAIL_API_PART2}${process.env.REACT_APP_GOOGLE_API_KEY}`);
         const json = await data.json();
-        console.log("VIDEO DATA2 :", json.items[0].snippet.title);
         
         const updatedVideoDetails = {
             "title": json.items[0].snippet.title,

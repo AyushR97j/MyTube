@@ -92,7 +92,7 @@ const Head = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
-          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+          onBlur={() => setTimeout(() => setShowSuggestions(false), 500)}
 
           />
           <button className='border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100' onClick={handleSearch}>

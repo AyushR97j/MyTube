@@ -22,11 +22,11 @@ const ButtonList = () => {
   }
 
   return (
-    <div className='relative z-10'>
+    <div className='relative z-10 mr-16'>
       <div className='absolute w-full flex items-center mt-3'>
-        <IoIosArrowBack className='rounded-full h-8 w-8 hover:bg-gray-300 ' onClick={leftScroll} />
+        <IoIosArrowBack className='rounded-full h-8 w-8 bg-gray-200 hover:bg-gray-300 ' onClick={leftScroll} />
         <div className='flex-grow'></div>
-        <IoIosArrowForward className='rounded-full h-8 w-8 hover:bg-gray-300' onClick={rightScroll} />
+        <IoIosArrowForward className='rounded-full h-8 w-8 bg-gray-200 hover:bg-gray-300' onClick={rightScroll} />
       </div>
       <div className='w-full flex overflow-x-hidden scroll-smooth ml-4' ref={scrollContRef}>
       {buttonListData.map ((data, idx) =>

@@ -9,7 +9,6 @@ import VideoDetail from './VideoDetail';
 const WatchPage = () => {
 
     const [searchParams] = useSearchParams();
-    //console.log("hfhdff",searchParams.get("v"));
 
     const dispatch = useDispatch();
     useEffect(() => {

@@ -49,7 +49,11 @@ const RelatedVideos = () => {
   return (
     <div className='w-full ml-3 mt-4 rounded-lg overflow'>
     {relatedVideos?.map((video, index) => (
-        <Link className='flex-shrink' key={index} to={`/watch?v=${video?.contentDetails?.upload?.videoId}`}>
+        <Link 
+            className='flex-shrink' 
+            key={index} 
+            to={`/watch?v=${video?.contentDetails?.upload?.videoId}`}
+        >
             <VideoCard info={video} />
         </Link>
     ))}

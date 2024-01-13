@@ -1,15 +1,19 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { GoHome } from "react-icons/go";
 import {SiYoutubeshorts} from "react-icons/si";
-import {MdOutlineSubscriptions} from "react-icons/md";
 import { FiSettings, FiHelpCircle } from "react-icons/fi";
 import * as PiIcons from "react-icons/pi";
+import { useEffect } from 'react';
 
 const Sidebar = () => {
   const isMenuOpen = useSelector(store => store.app.isMenuOpen);
 
+    const url = new URLSearchParams(window.location.search);
+    //console.log("our url",url.get('v'));
+    const isWatchPage = (url.get('v') != null);
+    console.log("isWatchPage", isWatchPage)
+  
   const exploreIconNames = [
     ['PiFire','Trending'],
     ['PiShoppingBagOpenLight', 'Shopping'],
@@ -23,11 +27,15 @@ const Sidebar = () => {
     ['PiCoatHangerLight', 'Fashion & beauty'],
     ['PiApplePodcastsLogoLight', 'Podcasts'],
   ];
+
+  useEffect(() => {
+
+  },[])
   
   if(!isMenuOpen) return null;
 
   return (
-    <div className='px-6 py-3 shadow-lg w-1/6 font-normal text-[1.1rem]'>
+    <div className={` h-screen px-6 py-3 shadow-lg w-1/6 font-normal text-[1.1rem] overflow-y-scroll ${isWatchPage ? "absolute z-10 bg-white shadow-black" : ""}`}>
       <ul className='flex flex-col gap-'>
         <Link to="/">
           <li className='flex items-center gap-4 py-2 pl-3 rounded-lg transition duration-200 ease-in-out hover:bg-gray-200'>

@@ -6,7 +6,7 @@ const MainContainer = () => {
   return (
     <div className='w-full overflow-x-hidden'>
       <ButtonList />
-      <VideoContainer />
+      <VideoContainer page="feed" />
     </div>
   )
 }

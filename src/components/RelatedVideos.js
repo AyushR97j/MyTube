@@ -37,9 +37,7 @@ const RelatedVideos = () => {
                 throw new Error('Failed to fetch video details');
             }
             const data = await response.json();
-            console.log("channelData",data);
             const channelId = data.items[0]?.snippet?.channelId;
-            console.log("channelId",channelId);
             return channelId;
         } catch (error) {
             console.log('Error:', error.message);
@@ -49,9 +47,9 @@ const RelatedVideos = () => {
     }
 
   return (
-    <div className='w-full ml-2 p-2 rounded-lg overflow'>
+    <div className='w-full ml-3 mt-4 rounded-lg overflow'>
     {relatedVideos?.map((video, index) => (
-        <Link className='flex-shrink' key={index} to={`/watch?v=${video.id}`}>
+        <Link className='flex-shrink' key={index} to={`/watch?v=${video?.contentDetails?.upload?.videoId}`}>
             <VideoCard info={video} />
         </Link>
     ))}

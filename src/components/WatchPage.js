@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import CommentsContainer from './CommentsContainer';
 import LiveChat from './LiveChat';
 import VideoDetail from './VideoDetail';
+import RelatedVideos from './RelatedVideos';
 
 const WatchPage = () => {
 
@@ -33,8 +34,15 @@ const WatchPage = () => {
         <LiveChat />
       </div>
     </div>
-    <VideoDetail videoId={searchParams.get("v")} />
-    <CommentsContainer />
+    <div className='flex'>
+      <div>
+        <VideoDetail videoId={searchParams.get("v")} />
+      <CommentsContainer />
+      </div>
+      <RelatedVideos />
+    </div>
+    
+    
     </div>
   )
 }

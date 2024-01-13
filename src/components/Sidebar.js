@@ -82,7 +82,7 @@ const Sidebar = () => {
           );
       })}
 
-      <div className='bg-slate-200 my-4 w-full rounded-full h-[1.5px]'></div>
+      <div className='bg-slate-300 my-4 w-full rounded-full h-[1.5px]'></div>
 
         <li className='flex items-center gap-4 py-2 pl-3 rounded-lg transition duration-200 ease-in-out hover:bg-gray-200'>
             <div className='scale-125'>

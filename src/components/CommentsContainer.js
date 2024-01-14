@@ -1,105 +1,78 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { commentsTimeStamp } from '../utils/helper';
+import { PiThumbsUpLight } from "react-icons/pi";
+import { PiThumbsDownLight } from "react-icons/pi";
 
-import userIcon from "../assets/images/userIcon.png";
-
-const commentsData = [
-    {
-        name: "Ayush Raj",
-        text: "lorem ipsum dolor sit am",
-        replies: [
-
-        ]
-    },
-    {
-        name: "Ayush Raj",
-        text: "lorem ipsum dolor sit am",
-        replies: [{
-        name: "Ayush Raj",
-        text: "lorem ipsum dolor sit am",
-        replies: [
-            {
-                name: "Ayush Raj",
-                text: "lorem ipsum dolor sit am",
-                replies: [
-                    {
-                        name: "Ayush Raj",
-                        text: "lorem ipsum dolor sit am",
-                        replies: [
-                
-                        ]
-                    }
-        
-                ]
-            },
-            {
-                name: "Ayush Raj",
-                text: "lorem ipsum dolor sit am",
-                replies: [
-        
-                ]
-            },
-            {
-                name: "Ayush Raj",
-                text: "lorem ipsum dolor sit am",
-                replies: [
-        
-                ]
-            }
-
-        ]
-    },
-
-        ]
-    },
-    {
-        name: "Ayush Raj",
-        text: "lorem ipsum dolor sit am",
-        replies: [
-
-        ]
-    },
-    {
-        name: "Ayush Raj",
-        text: "lorem ipsum dolor sit am",
-        replies: [
-
-        ]
-    }
-];
 
 const Comment = ({data}) => {
-    const {name, text} = data;
+    //console.log("data",data);
+    const name = data?.snippet?.topLevelComment?.snippet?.authorDisplayName;
+    //console.log("name",data?.snippet?.topLevelComment?.snippet?.authorDisplayName);
+    const publishedAt = commentsTimeStamp(data)
+    //console.log("pubAt",publishedAt);
+    const likeCount = data?.snippet?.topLevelComment?.snippet?.likeCount;
+    //console.log("likecount",data?.snippet?.topLevelComment?.snippet?.likeCount)
+    const textOriginal = data?.snippet?.topLevelComment?.snippet?.textOriginal;
+    console.log("text",data?.snippet?.topLevelComment?.snippet?.textOriginal)
+    const authorProfileImageUrl = data?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl;
+    //console.log("url",data?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl)
+    
     return (
-        <div className='flex shadow-sm bg-gray-100 p-2 rounded-lg my-2'>
-            <img className='h-12' alt='user' src={userIcon} />
-            <div className='px-3'>
-                <p className='font-bold'>{name}</p>
-                <p>{text}</p>
+        <div className='flex my-4 gap-3'>
+            <img className='bg-gray-200 flex h-10 w-10 rounded-full' src={authorProfileImageUrl}  alt="ProfileImg" />
+            <div>
+                <div className='flex gap-2'>
+                    <div className='font-semibold'>{name}</div>
+                    <div>{publishedAt}</div>
+                </div>
+                <div>{textOriginal}</div>
+                <div className='flex gap-10'>
+                    <div className='flex items-center gap-2'>
+                        <div><PiThumbsUpLight /></div>
+                        <div>{likeCount}</div>
+                    </div>
+                    <div className='flex items-center'>
+                        <PiThumbsDownLight />
+                    </div>
+                </div>
+                
             </div>
         </div>
-        
     )
 }
 
-const CommentsList = ( {comments} ) => {
-    return comments.map((comment,  index) => (
-        <div key={index} >
+const CommentList = ({comments}) => {
+    return comments.map((comment, index) => (
+        <div key={index}>
             <Comment data={comment} />
-            <div className='pl-5 border border-l-black ml-5'>
-                <CommentsList comments={comment.replies} />
-            </div>
         </div>
-        
-    ));
-};
+    ))
+}
 
-const CommentsContainer = () => {
+const CommentsContainer = ({videoId}) => {
+
+    const [comments, setCommets] = useState(null);
+
+    const getComments = async() => {
+        const data = await fetch(`https://www.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&videoId=${videoId}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
+        const json = await data.json();
+        console.log("json",json.items)
+        setCommets(json.items)
+        //console.log(json.items[0].snippet.topLevelComment.snippet.authorDisplayName)
+    }
+
+    useEffect( () => {
+        getComments();
+    },[])
+
   return (
-    <div className='m-5 p-2 w-[906px]'>
-        <h1 className='text-2xl font-bold'>Comments :</h1>
-        <CommentsList comments = {commentsData} />
+    <div className='ml-8'>
+    <div className='font-bold text-xl'>Comments :</div>
+    { comments &&
+        <CommentList comments={comments}/> 
+    }
     </div>
-  );
-};
+  )
+}
 
 export default CommentsContainer

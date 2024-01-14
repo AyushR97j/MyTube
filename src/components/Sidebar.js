@@ -12,7 +12,7 @@ const Sidebar = () => {
     const url = new URLSearchParams(window.location.search);
     //console.log("our url",url.get('v'));
     const isWatchPage = (url.get('v') != null);
-    console.log("isWatchPage", isWatchPage)
+    // console.log("isWatchPage", isWatchPage)
   
   const exploreIconNames = [
     ['PiFire','Trending'],

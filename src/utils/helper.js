@@ -37,3 +37,30 @@ export function makeRandomMessage(length) {
     }
     return result;
 }
+
+export function commentsTimeStamp(data) {
+  const publishedAt = new Date(data?.snippet?.topLevelComment?.snippet?.publishedAt);
+  const currentDate = new Date();
+
+  const timeDifferenceInMilliseconds = currentDate - publishedAt;
+  const secondsAgo = Math.floor(timeDifferenceInMilliseconds / 1000);
+
+  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+
+  if (secondsAgo < 60) {
+  return(rtf.format(-secondsAgo, 'second'));
+  } else if (secondsAgo < 3600) {
+  const minutesAgo = Math.floor(secondsAgo / 60);
+  return(rtf.format(-minutesAgo, 'minute'));
+  } else if (secondsAgo < 86400) {
+  const hoursAgo = Math.floor(secondsAgo / 3600);
+  return(rtf.format(-hoursAgo, 'hour'));
+  } else if (secondsAgo < 2592000) { // Roughly 30 days
+  const daysAgo = Math.floor(secondsAgo / 86400);
+  return(rtf.format(-daysAgo, 'day'));
+  } else {
+  const monthsAgo = Math.floor(secondsAgo / 2592000); // Roughly 30 days
+  return(rtf.format(-monthsAgo, 'month'));
+  }
+
+}

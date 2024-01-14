@@ -66,7 +66,7 @@ const CommentsContainer = ({videoId}) => {
     },[])
 
   return (
-    <div className='ml-8'>
+    <div className='ml-8 max-w-[920px]'>
     <div className='font-bold text-xl'>Comments :</div>
     { comments &&
         <CommentList comments={comments}/> 

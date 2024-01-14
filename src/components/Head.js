@@ -67,7 +67,7 @@ const Head = () => {
   };
 
   return (
-    <div className='grid grid-flow-col p-5 shadow-lg w-screen'>
+    <div className='grid grid-flow-col px-5 py-4 w-screen'>
       <div className='flex col-span-1'>
         <img
             onClick={() => toggleMenuHandler()}

@@ -9,7 +9,7 @@ const VideoCard = ({info}) => {
     // console.log("info",info);
 
   return (
-    <div className={`m-2 p-2 w-72 ${isWatchPage ? 'flex flex-row gap-3 p-2 w-5/6 h-32' : ''}`}>
+    <div className={`m-2 p-2 w-72 ${isWatchPage ? 'flex flex-row gap-3 p-2 w-10/12 h-32' : ''}`}>
       <img className='rounded-lg' alt="thumbnail" src={thumbnails.medium.url} />
       <div>
         <div className={`font-bold py-0 line-clamp-2`}>{title}</div>

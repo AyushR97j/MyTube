@@ -6,10 +6,10 @@ import Head from './Head'
 const Body = () => {
   return (
     <div className='flex flex-wrap overflow-x-hidden'>
-      <div>
+      <div className='fixed z-20 bg-white'>
         <Head />
       </div>
-      <div className='flex w-screen'>
+      <div className='flex w-screen mt-16 -z-0'>
         <Sidebar />
         <Outlet/>
       </div>

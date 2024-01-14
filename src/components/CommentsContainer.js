@@ -13,7 +13,7 @@ const Comment = ({data}) => {
     const likeCount = data?.snippet?.topLevelComment?.snippet?.likeCount;
     //console.log("likecount",data?.snippet?.topLevelComment?.snippet?.likeCount)
     const textOriginal = data?.snippet?.topLevelComment?.snippet?.textOriginal;
-    console.log("text",data?.snippet?.topLevelComment?.snippet?.textOriginal)
+    //console.log("text",data?.snippet?.topLevelComment?.snippet?.textOriginal)
     const authorProfileImageUrl = data?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl;
     //console.log("url",data?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl)
     
@@ -56,7 +56,7 @@ const CommentsContainer = ({videoId}) => {
     const getComments = async() => {
         const data = await fetch(`https://www.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&videoId=${videoId}&key=${process.env.REACT_APP_GOOGLE_API_KEY}`)
         const json = await data.json();
-        console.log("json",json.items)
+        //console.log("json",json.items)
         setCommets(json.items)
         //console.log(json.items[0].snippet.topLevelComment.snippet.authorDisplayName)
     }

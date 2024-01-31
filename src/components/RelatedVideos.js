@@ -24,7 +24,7 @@ const RelatedVideos = () => {
 
             const data = await fetch(`https://www.googleapis.com/youtube/v3/activities?part=snippet%2CcontentDetails&maxResults=50&regionCode=in&key=${process.env.REACT_APP_GOOGLE_API_KEY}&channelId=${channelId}`);
             const json = await data.json();
-            console.log("ih",json);
+            console.log("realted video",json.items);
             setRelatedVideos(json?.items);
             console.log("hi", relatedVideos);
 
@@ -55,7 +55,7 @@ const RelatedVideos = () => {
         <Link 
             className='flex-shrink' 
             key={index} 
-            to={`/watch?v=${video?.contentDetails?.upload?.videoId}`}
+            to={`/watch?v=${video?.contentDetails?.upload?.videoId || video?.contentDetails?.playlistItem?.resourceId?.videoId || ''}`}
         >
             <VideoCard info={video} />
         </Link>

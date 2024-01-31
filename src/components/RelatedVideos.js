@@ -10,7 +10,8 @@ const RelatedVideos = () => {
         const url = new URLSearchParams(window.location.search);
         const videoId =  url.get('v');
         //console.log(videoId);
-        const channelId =  getChannelId(videoId);
+        //const channelId =  getChannelId(videoId);
+        //console.log("cid",channelId)
         getRelatedVideos(videoId);
     }, []);
 
@@ -23,7 +24,9 @@ const RelatedVideos = () => {
 
             const data = await fetch(`https://www.googleapis.com/youtube/v3/activities?part=snippet%2CcontentDetails&maxResults=50&regionCode=in&key=${process.env.REACT_APP_GOOGLE_API_KEY}&channelId=${channelId}`);
             const json = await data.json();
-            setRelatedVideos(json.items)
+            console.log("ih",json);
+            setRelatedVideos(json?.items);
+            console.log("hi", relatedVideos);
 
         } catch(error) {
             console.log('Error fetching data from the YouTube API:', error);

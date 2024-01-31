@@ -8,6 +8,7 @@ const VideoDetail = ({videoId}) => {
 
     useEffect( () => {
         getVideoDetails();
+        console.log("videoId",videoId)
     }, [videoId]);
 
     const handleReadMoreClick = () => {

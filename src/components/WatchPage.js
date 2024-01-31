@@ -19,7 +19,8 @@ const WatchPage = () => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(closeMenu())
+        dispatch(closeMenu());
+        console.log("vis",searchParams.get("v"));
 
         return () => {
           dispatch(closeMenu())

@@ -23,6 +23,7 @@ const VideoContainer = ({page}) => {
     try {
       const data = await fetch(YOUTUBE_VIDEOS_API);
       const json = await data.json();
+      console.log("x",json.items[0]);
       setVideos(json.items);
       setLoading(false);
     } catch (error) {
@@ -39,7 +40,7 @@ const VideoContainer = ({page}) => {
                     return <ShimmerVideoCard key={index} />;
                   }) : (
       videos?.map( (video, index) => ( 
-        <Link className='flex-shrink' key={index} to={"/watch?v="+video.id} >
+        <Link className='flex-shrink' key={index} to={page === 'feed' ? `/watch?v=${video?.id}` : `/watch?v=${video?.id.videoId}`} >
           <VideoCard info={video}/>
         </Link>
       ))

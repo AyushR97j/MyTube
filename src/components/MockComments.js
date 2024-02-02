@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-
 import userIcon from "../assets/images/userIcon.png";
+import { useSelector } from 'react-redux';
 
 const commentsData = [
     {
@@ -97,6 +97,8 @@ const MockComments = () => {
 
     const[text, setText] = useState("...show more");
     const[isExpanded, setIsExpanded] = useState(false);
+    const theme = useSelector((store) => store.app.theme);
+
 
     const handleReadMoreClick = () => {
         setIsExpanded(!isExpanded)
@@ -110,8 +112,8 @@ const MockComments = () => {
       };
 
   return (
-    <div className='m-5 p-2 w-[906px] bg-gray-200 ml-10 rounded-xl opacity-70'>
-        <div className='text-xl '><span className='font-semibold'>Mock comments:</span> <span className='text-md font-medium'> (Nevermind! Just some random section)</span></div>
+    <div className={`m-5 p-2 w-[906px] bg-gray-200 ml-10 rounded-xl opacity-70 text-black ${theme === 'dark' ? 'bg-gray-900 text-white' : ''}`}>
+        <div className={`text-xl${theme === 'dark' ? 'bg-black text-white' : ''}`}><span className='font-semibold'>Mock comments:</span> <span className='text-md font-medium'> (Nevermind! Just some random section)</span></div>
         {isExpanded &&
             <CommentsList comments = {commentsData} />
         }

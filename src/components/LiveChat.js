@@ -10,7 +10,7 @@ const LiveChat = () => {
 
   const dispatch = useDispatch();
   const chatMessages = useSelector((store) => store.chat.messages);
-
+  const theme = useSelector((store) => store.app.theme);
 
     useEffect(() => {
         const i = setInterval(() => {
@@ -27,7 +27,7 @@ const LiveChat = () => {
 
   return (
     <>
-    <div className='w-full h-[412px] ml-2 p-2 border border-black rounded-lg bg-slate-100 overflow-y-scroll flex flex-col-reverse'>
+    <div className={`w-full h-[412px] ml-2 p-2 border border-black rounded-lg bg-slate-100 overflow-y-scroll flex flex-col-reverse ${theme === 'dark' ? 'bg-gray-900 text-white' : ''}`}>
         <div>
         {chatMessages.map( (c,i) => <ChatMessage 
         key={i}
@@ -51,7 +51,7 @@ const LiveChat = () => {
     }}
     >
       <input 
-        className='px-2 w-96'
+        className={`px-2 w-96 rounded-full ${theme === 'dark' ? ' text-black' : ''}`}
         placeholder='Chat with Live Audience...'
         type="text" 
         value={liveMessage} 

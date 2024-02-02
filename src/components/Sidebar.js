@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 
 const Sidebar = () => {
   const isMenuOpen = useSelector(store => store.app.isMenuOpen);
+  const theme = useSelector((store) => store.app.theme);
 
     const url = new URLSearchParams(window.location.search);
     //console.log("our url",url.get('v'));
@@ -35,7 +36,7 @@ const Sidebar = () => {
   if(!isMenuOpen) return null;
 
   return (
-    <div className={`fixed h-screen px-6 py-3 pb-32 shadow-lg w-1/6 font-normal text-[1.1rem] overflow-y-scroll ${isWatchPage ? "absolute z-10 bg-white shadow-black" : ""}`}>
+    <div className={`fixed h-screen px-6 py-3 pb-32 shadow-lg w-1/6 font-normal text-[1.1rem] overflow-y-scroll ${isWatchPage ? "absolute z-10  shadow-black" : ""} ${theme === 'dark' ? 'bg-black text-white' : 'bg-white'}`}>
       <ul className='flex flex-col gap-'>
         <Link to="/">
           <li className='flex items-center gap-4 py-2 pl-3 rounded-lg transition duration-200 ease-in-out hover:bg-gray-200'>

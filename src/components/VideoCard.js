@@ -7,7 +7,7 @@ const VideoCard = ({info}) => {
     //console.log("our url",url.get('v'));
     const isWatchPage = (url.get('v') != null);
     // console.log("info",info);
-    console.log("watch page",isWatchPage);
+    //console.log("watch page",isWatchPage);
 
   return (
     <div className={`m-2 p-2 w-72 ${isWatchPage ? 'flex flex-row gap-3 p-2 w-10/12 h-32' : ''}`}>

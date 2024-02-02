@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+
 import VideoCard from './VideoCard';
 import { Link } from 'react-router-dom';
 import ShimmerVideoCard from './ShimmerVideoCard';
@@ -6,6 +8,8 @@ import ShimmerVideoCard from './ShimmerVideoCard';
 const VideoContainer = ({page}) => {
 
   const [loading, setLoading] = useState(true);
+  const theme = useSelector((store) => store.app.theme);
+
   const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY
   
   const YOUTUBE_VIDEOS_API =
@@ -33,7 +37,7 @@ const VideoContainer = ({page}) => {
   }
 
   return (
-    <div className='flex flex-wrap items-start gap-2 justify-center -ml-2'>
+    <div className={`flex flex-wrap items-start gap-2 justify-center -ml-2 ${theme === 'dark' ? ' bg-black text-white' : ''}`}>
     {loading ? Array(24)
                   .fill("")
                   .map((e, index) => {

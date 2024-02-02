@@ -1,10 +1,12 @@
 import {useEffect, useState} from 'react'
+import { useSelector } from 'react-redux'
 
 const VideoDetail = ({videoId}) => {
 
     const[videoDetails, setVideoDetails] = useState({});
     const [showFullContent, setShowFullContent] = useState(false);
     const[text, setText] = useState("...read more");
+    const theme = useSelector((store) => store.app.theme);
 
     useEffect( () => {
         getVideoDetails();
@@ -72,7 +74,7 @@ const VideoDetail = ({videoId}) => {
     }
   
     return (
-    <div className=' ml-10 w-[900px] mt-4'>
+    <div className='ml-10 w-[900px] mt-4'>
         <span className="font-bold text-xl">
             {videoDetails?.title}
         </span>
@@ -84,11 +86,11 @@ const VideoDetail = ({videoId}) => {
                     <span className='font-semibold'>{videoDetails?.channelName}</span>
                     <span>{Math.floor(videoDetails?.subscriberCount/1000)}K subscribers</span>
                 </span>
-                <span className="ml-80 rounded-full bg-gray-100 mb-8 py-1 px-3">
+                <span className={`ml-80 rounded-full bg-gray-100 mb-8 py-1 px-3 ${theme === 'dark' ? 'bg-gray-900 text-white' : ''}`}>
                     {Math.floor(videoDetails?.likeCount/1000)}K likes
                 </span>
             </div>
-        <div className='flex flex-col gap-3 rounded-xl px-3 py-3 bg-gray-200'>
+        <div className={`flex flex-col gap-3 rounded-xl px-3 py-3 bg-gray-200 ${theme === 'dark' ? 'bg-gray-900 text-white' : ''}`}>
             <div className='flex gap-4'>
                 <span>
                     {Math.floor(videoDetails?.viewCount/1000)}K views
